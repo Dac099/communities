@@ -35,10 +35,8 @@ export const Login = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (emptyFields){
-      console.log(dataForm);
-      return;
-    }
+    validateInputs();
+    validatePassword();
 
     setDataForm({
       email: '',
@@ -47,22 +45,27 @@ export const Login = (props) => {
     });
   }
 
-  const emptyFields = () => {
+  const validateInputs = () => {
     const {email, password, username} = dataForm;
 
     if(props.signup){
-      if(email.length < 1 || password.length < 1 || username.length < 1){
-        alert('Los campos deben de llenarse correctamente');
-        return false;
+      if(email == '' || password == '' || username == ''){
+        alert("Debes de llenar los campos correctamente");
       }
     }
 
-    if(email.length < 1 || password.length < 1){
-      alert('Usuario o contraseña incorrectos');
-      return false;
+    if(email == '' || password == ''){
+      alert("Debes de llenar los campos correctamente");
     }
+  }
 
-    return true;
+  const validatePassword = () => {
+    const {password} = dataForm;
+    const regex = /[_!@0-9.&]+/;
+
+    if(!(password.length > 8 && regex.test(password))){
+      alert(`La contraseña debe contar con más de 8 caracteres y con almenos un caracter especial como: "números del 0 al 9", "_", "!", "." o "&"`);
+    }
   }
 
   return (
