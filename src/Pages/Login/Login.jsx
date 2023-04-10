@@ -8,22 +8,69 @@ export const Login = (props) => {
   });
   
   const handleChange = (newValue, target) => {
-    switch(target){
-      case 'email':
-        break;
-      case 'username':
-        break;
-      case 'password':
-        break;
-      default:
-        console.log('Error in the form input field for Login/signup');
+    if(target == 'email'){
+      setDataForm({
+        ...dataForm,
+        email: newValue,
+      });
     }
+
+    if(target == 'password'){
+      setDataForm({
+        ...dataForm,
+        password: newValue,
+      });
+    }
+
+    if(target == 'username'){
+      setDataForm({
+        ...dataForm,
+        username: newValue
+      });
+    }
+
+
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (emptyFields){
+      console.log(dataForm);
+      return;
+    }
+
+    setDataForm({
+      email: '',
+      password: '',
+      username: ''
+    });
+  }
+
+  const emptyFields = () => {
+    const {email, password, username} = dataForm;
+
+    if(props.signup){
+      if(email.length < 1 || password.length < 1 || username.length < 1){
+        alert('Los campos deben de llenarse correctamente');
+        return false;
+      }
+    }
+
+    if(email.length < 1 || password.length < 1){
+      alert('Usuario o contraseña incorrectos');
+      return false;
+    }
+
+    return true;
   }
 
   return (
     <article>
       <h2>{props.signup ? "Registrate" : "Inicia Sesión"}</h2>
-      <form>
+      <form onSubmit={e => {
+        handleSubmit(e);
+      }}>
         <div>
           <label htmlFor="inputEmail">Correo electrónico</label>
           <input
@@ -31,7 +78,6 @@ export const Login = (props) => {
             id="inputEmail"
             name="inputEmail"
             placeholder="ejemplo@site.com"
-            required
             value={dataForm.email}
             onChange={(e) => handleChange(e.target.value, 'email')}
           />
@@ -44,7 +90,7 @@ export const Login = (props) => {
               type="text"
               id="inputUserName"
               name="inputUserName"
-              required
+
               placeholder="MyUserName"
               value={dataForm.username}
               onChange={(e) => handleChange(e.target.value, 'username')}
@@ -56,7 +102,6 @@ export const Login = (props) => {
           <label htmlFor="inputPassword">Constraseña</label>
           <input
             type="password"
-            required
             id="inputPassword"
             name="inputPassword"
             value={dataForm.password}
