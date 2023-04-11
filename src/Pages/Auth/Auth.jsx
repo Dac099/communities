@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { supabase } from "../../supabase/Connection.js";
 import { saveData } from "../../utilities/manageLocalStorage.js";
-import { article, control__auth, btn_selected, form, container, btn_submit } from "./index.module.css";
+import { article, control__auth, btn_selected, form, container, btn_submit, input__error, error__msg } from "./index.module.css";
 import { Button } from "../../components/Button/Button.jsx";
 
 export const Login = () => {
@@ -11,6 +11,11 @@ export const Login = () => {
   });
 
   const [isSignUp, setIsSignUp] = useState(false);
+
+  const [errorInput, setErrorInput] = useState({
+    message: 'Debes llenar los campos',
+    onError: true
+  });
 
   const handleChange = (newValue, target) => {
     if (target == "email") {
@@ -32,7 +37,10 @@ export const Login = () => {
     e.preventDefault();
 
     if (isInputEmpty()) {
-      alert("Debes de llenar los campos");
+      setErrorInput({
+        message: "Debes de llenar los campos",
+        onError: true
+      });
       return;
     }
 
@@ -131,6 +139,7 @@ export const Login = () => {
           className={form}
         >
           <div>
+            <p className={errorInput.onError && error__msg}>{errorInput.message}</p>
             <label htmlFor="inputEmail">Correo electrónico</label>
             <input
               type="email"
@@ -139,6 +148,7 @@ export const Login = () => {
               placeholder="ejemplo@site.com"
               value={dataForm.email}
               onChange={(e) => handleChange(e.target.value, "email")}
+              className={errorInput.onError && input__error}
             />
           </div>
 
@@ -151,6 +161,7 @@ export const Login = () => {
               value={dataForm.password}
               onChange={(e) => handleChange(e.target.value, "password")}
               placeholder="************"
+              className={errorInput.onError && input__error}
             />
           </div>
 
