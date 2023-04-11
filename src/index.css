@@ -1,0 +1,25 @@
+:root{
+  --title-font: 'Fredoka', sans-serif;
+  --text-font: 'Barlow', sans-serif;
+  --bg-main-color: #D9D9D9;
+  --bg-secondary-color: #FFFFFE;
+  --main-text-color: #0D0D0D;
+  --light-text-color: rgba(13, 13, 13, 0.66);
+  --orange-color: #FF8E3C;
+  --pink-color: #D9376E;
+  --modal-bg-color: rgba(13, 13, 13, 0.93);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 62.5%;
+}
+
+body{
+  background-color: var(--bg-secondary-color);
+}

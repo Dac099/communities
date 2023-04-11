@@ -1,0 +1,17 @@
+.btn{
+  width: 18rem;
+  height: 4rem;
+  font-family: var(--text-font);
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: var(--orange-color);
+  border-radius: 1rem;
+  cursor: pointer;
+  border: 0.2rem solid var(--orange-color);
+  background-color: var(--bg-secondary-color);
+}
+
+.btn:hover{
+  background-color: var(--orange-color);
+  color: var(--bg-secondary-color);
+}
