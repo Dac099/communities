@@ -40,6 +40,7 @@
   align-items: center;
   flex-direction: column;
   gap: 0.8rem;
+  width: min-content;
 }
 
 .form label{
@@ -80,7 +81,32 @@
 .form .error__msg{
   color: var(--pink-color);
   font-family: var(--text-font);
-  font-size: 1.7rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: absolute;
+  top: -8rem;
+}
+
+@keyframes shake {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-8px, 0); }
+  50% { transform: translate(8px, 0); }
+  75% { transform: translate(-8px, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+.animated_error {
+  animation-name: shake;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+}
+
+.form .password_error{
+  color: var(--pink-color);
+  font-size: 1.3rem;
+  width: 100%;
+  padding: 0rem 2.5rem;
+  display: block;
 }
 
 @media only screen and (max-width: 410px) {
