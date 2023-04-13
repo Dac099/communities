@@ -1,6 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "../../supabase/Connection.js";
-import { saveData } from "../../utilities/manageLocalStorage.js";
 import {
   article,
   control__auth,
@@ -14,11 +13,24 @@ import {
   password_error,
 } from "./index.module.css";
 import { Button } from "../../components/Button/Button.jsx";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    supabase.auth.getSession()
+    .then(sessionData => {
+      if(sessionData.data.session.user){
+        navigate("/");
+      }
+    })
+  }, []);
+
   const [dataForm, setDataForm] = useState({
     email: "",
     password: "",
+    username: "",
   });
 
   const [isSignUp, setIsSignUp] = useState(false);
@@ -51,6 +63,13 @@ export const Login = () => {
         password: newValue,
       });
     }
+
+    if (target == "username") {
+      setDataForm({
+        ...dataForm,
+        username: newValue,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -71,7 +90,7 @@ export const Login = () => {
 
     if (isSignUp) {
       supabaseSignUp().then((userData) => {
-        saveData(userData.session, "session");
+        console.log(userData);
       });
 
       return;
@@ -86,7 +105,12 @@ export const Login = () => {
   };
 
   const isInputEmpty = () => {
-    const { email, password } = dataForm;
+    const { email, password, username } = dataForm;
+
+    if (isSignUp){
+      return email == "" || password == "" || username == "";
+    }
+
     return email == "" || password == "";
   };
 
@@ -105,7 +129,7 @@ export const Login = () => {
 
     if (error) {
       setErrorInput({
-        message: 'Credenciales invalidas',
+        message: "Credenciales invalidas",
         onError: true,
       });
       return;
@@ -118,27 +142,30 @@ export const Login = () => {
     const { data, error } = await supabase.auth.signUp({
       email: dataForm.email,
       password: dataForm.password,
+      options: {
+        data: {
+          username: dataForm.username
+        }
+      }
     });
 
     if (error) {
+      const error_msg =
+        error.message === "User already registered"
+          ? "Este usuario ya ha sido registrado"
+          : error.message;
       setErrorInput({
-        message: error.message,
+        message: error_msg,
         onError: true,
       });
       return;
     }
+
+    return data;
   };
 
-  const userExist = async() => {
-    const {data: {user}} = await supabase.auth.getUser();
-    console.log(user);
-  }
-
   return (
-    <article className={article}>
-      <button onClick={() => {
-        userExist()
-      }}>test</button>
+    <article className={article}>    
       <h2>{isSignUp ? "Registrate" : "Inicia Sesión"}</h2>
 
       <section className={control__auth}>
@@ -186,6 +213,23 @@ export const Login = () => {
               }
             />
           </div>
+
+          {isSignUp && (
+            <div>
+              <label htmlFor="inputUsername">Nombre de usuario</label>
+              <input
+                type="text"
+                id="inputUsername"
+                name="inputUsername"
+                placeholder="Nombre ejemplo_01"
+                className={
+                  errorInput.onError ? `${input__error} ${animated_error}` : ""
+                }
+                onChange={e => handleChange(e.target.value, "username")}
+                value={dataForm.username}
+              />
+            </div>
+          )}
 
           <div>
             <label htmlFor="inputPassword">Constraseña</label>
