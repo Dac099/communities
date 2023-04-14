@@ -19,9 +19,8 @@ export const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getSession()
-    .then(sessionData => {
-      if(sessionData.data.session.user){
+    supabase.auth.onAuthStateChange((event, session) => {
+      if(session){
         navigate("/");
       }
     })
@@ -107,7 +106,7 @@ export const Login = () => {
   const isInputEmpty = () => {
     const { email, password, username } = dataForm;
 
-    if (isSignUp){
+    if (isSignUp) {
       return email == "" || password == "" || username == "";
     }
 
@@ -165,7 +164,7 @@ export const Login = () => {
   };
 
   return (
-    <article className={article}>    
+    <article className={article}>
       <h2>{isSignUp ? "Registrate" : "Inicia Sesión"}</h2>
 
       <section className={control__auth}>
