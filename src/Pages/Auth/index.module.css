@@ -56,7 +56,7 @@
   border-radius: 0.5rem;
   outline: none;
   border: none;
-  background-color: var(--bg-main-color);
+  background-color: var(--bg-secondary-color);
   text-align: center;
   font-family: var(--text-font);
   font-size: 1.8rem;

@@ -1,43 +1,29 @@
 import { supabase } from "../../supabase/Connection";
 import { useState, useEffect, useRef } from "react";
 import { sectionData } from "./Profile.module.css";
+import { getGroupsByUserId, getConectionsByUserId } from "../../utilities/manageDB";
 
 export const ProfileData = (props) => {
-  const user = useRef({});
+  const userData = useRef({});
 
-  supabase.auth.getUser()    
-    .then(userData => {
-      user.current = {
-        id : userData.data.user.id,
-        email: userData.data.user.email,
-        data: userData.data.user.user_metadata          
+  useEffect(() => {
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+
+      console.log(await getGroupsByUserId(user.id));
+
+      userData.current = {
+        id: user.id,
+        email: user.email,
+        data: user.user_metadata,
+        dates_elements: 0,
+        groups_joined: 0,
+        connections: 0
       };
 
-      
-      getJoinedGroups(user.current.id)
-      .then(count => user.current.joined_groups = count);
-      
-      console.log(user.current);
-    })
-
-  const getJoinedGroups = async (user_id) => {    
-    const {count, error} = await supabase
-    .from('comunities')
-    .select('user_id', {count:"exact"})
-    .eq('user_id', user_id);
-
-    if(error) return error;
-
-    return count;
-  }
-
-  const getconections = () => {
-
-  }
-
-  const getActivities = () => {
-
-  }
+      console.log("User: ", userData.current);
+    })();
+  }, []);
 
   return (
     <section className={sectionData}>
