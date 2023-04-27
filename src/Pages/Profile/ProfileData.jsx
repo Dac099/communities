@@ -10,15 +10,16 @@ export const ProfileData = (props) => {
     (async () => {
       const { data: { user } } = await supabase.auth.getUser();
 
-      console.log(await getGroupsByUserId(user.id));
+      const groups = await getGroupsByUserId(user.id);
+      const countConections = await  getConectionsByUserId(user.id);
 
       userData.current = {
         id: user.id,
         email: user.email,
         data: user.user_metadata,
         dates_elements: 0,
-        groups_joined: 0,
-        connections: 0
+        groups_joined: groups.length,
+        connections: countConections
       };
 
       console.log("User: ", userData.current);
