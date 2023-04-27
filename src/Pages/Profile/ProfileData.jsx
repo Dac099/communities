@@ -1,52 +1,29 @@
-import { supabase } from "../../supabase/Connection";
-import { useState, useEffect, useRef } from "react";
-import { sectionData } from "./Profile.module.css";
-import { getGroupsByUserId, getConectionsByUserId } from "../../utilities/manageDB";
+import { sectionData, username, userInfo } from "./Profile.module.css";
 
-export const ProfileData = (props) => {
-  const userData = useRef({});
-
-  useEffect(() => {
-    (async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-
-      const groups = await getGroupsByUserId(user.id);
-      const countConections = await  getConectionsByUserId(user.id);
-
-      userData.current = {
-        id: user.id,
-        email: user.email,
-        data: user.user_metadata,
-        dates_elements: 0,
-        groups_joined: groups.length,
-        connections: countConections
-      };
-
-      console.log("User: ", userData.current);
-    })();
-  }, []);
-
-  return (
+export const ProfileData = ({userData}) => {
+  return (userData != null &&
     <section className={sectionData}>
-      <div>
+      <div className={username}>
         <p>Nombre de usuario</p>
         <div>
-          {/* {user.current.data.username} */}
+          {userData.data.username}
         </div>
       </div>
 
-      <div>
+      <div className={userInfo}>
         <div>
           <div>Conexiones con personas</div>
-          <div></div>
+          <div>{userData.connections}</div>
         </div>
+
         <div>
-          <div>Miembro de grupos</div>
-          <div></div>
+          <div>Integrado en grupos</div>
+          <div>{userData.groups_joined}</div>
         </div>
+
         <div>
           <div>Actividades realizadas</div>
-          <div></div>
+          <div>{userData.dates_elements}</div>
         </div>
       </div>
     </section>

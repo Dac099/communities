@@ -1,7 +1,98 @@
 .cardLayout{
-
+  display: grid;
+  grid-template-columns: 20% 80%;
+  gap: 1rem;
+  padding: 2rem;
 }
 
 .sectionData{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr;
+  align-items: center;
+  justify-items: center;
+  font-family: var(--text-font);
+  color: var(--main-text-color);
+}
+
+.username{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.username p{
+  color: var(--orange-color);
+  font-size: 4rem;
+  font-weight: 200;
+}
+
+.username div{
+  background-color: var(--bg-main-color);
+  width: 40rem;
+  height: 6rem;
+  display: grid;
+  place-content: center;
+  border-radius: 1rem;
+  font-size: 3.5rem;
+  box-shadow: 0.2rem 0.2rem 0rem 0.2rem rgba(0,0,0, 0.25);
+}
+
+.userInfo{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.userInfo div{
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
   
+}
+
+.userInfo div div{
+  display: grid;
+  place-content: center;
+  width: 20rem;
+  height: 6rem;
+  background-color: var(--bg-main-color);
+  border-radius: 1rem;
+  box-shadow: 0.2rem 0.2rem 0rem 0.2rem rgba(0,0,0, 0.25);
+  font-size: 2rem;
+  padding: 0.5rem;
+}
+
+.userInfo div div:nth-child(1){
+  text-align: center;
+}
+
+.userInfo div div:nth-child(2){
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+.pictureSection{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.pictureSection div{
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background-color: var(--orange-color);
+  border-radius: 50%;
+}
+
+.pictureSection div div{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 60px;
+  height: 60px;
+  background-color: var(--pink-color);
+  border-radius: 50%;
 }
