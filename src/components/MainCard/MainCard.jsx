@@ -1,11 +1,13 @@
-import { card } from "./MainCard.module.css";
+import { card, cardContainer } from "./MainCard.module.css";
 
 export const MainCard = (props) => {
   return (
-    <article 
-      className={`${card} ${props.styles}`}
-    >
-      {props.children}
+    <article className={cardContainer}>
+      <article
+        className={`${card} ${props.styles}`}
+      >
+        {props.children}
+      </article>
     </article>
   );
 }

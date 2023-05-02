@@ -1,12 +1,14 @@
 .cardLayout{
-  display: grid;
-  grid-template-columns: 20% 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   gap: 1rem;
   padding: 2rem;
 }
 
 .sectionData{
   display: grid;
+  gap: 2rem;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 2fr;
   align-items: center;
@@ -29,7 +31,8 @@
 
 .username div{
   background-color: var(--bg-main-color);
-  width: 40rem;
+  width: 100%;
+  max-width: 40rem;
   height: 6rem;
   display: grid;
   place-content: center;
@@ -95,4 +98,18 @@
   height: 60px;
   background-color: var(--pink-color);
   border-radius: 50%;
+}
+
+@media only screen and (max-width: 470px){
+  .sectionData{
+    gap: 1rem;
+  }
+
+  .username p{
+    font-size: 2.5rem;
+  }
+
+  .userInfo div div{
+    
+  }
 }

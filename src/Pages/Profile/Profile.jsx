@@ -7,8 +7,7 @@ import { ProfileData } from "./ProfileData";
 import { ProfilePicture } from "./ProfilePicture";
 import { getGroupsByUserId, getConectionsByUserId, getActivitiesByUserId } from "../../utilities/manageDB";
 import { cardLayout } from "./Profile.module.css";
-import { BounceLoader as Loader } from "react-spinners";
-
+import { PageLoader } from "../../components/PageLoader/PageLoader";
 
 export const Profile = (props) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -61,7 +60,7 @@ export const Profile = (props) => {
   }
 
   if(isLoading){
-    return <Loader />
+    return <PageLoader />
   }
 
   return (
