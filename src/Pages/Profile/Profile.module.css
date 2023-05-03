@@ -1,7 +1,7 @@
 .cardLayout{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   gap: 1rem;
   padding: 2rem;
 }
@@ -43,23 +43,14 @@
 
 .userInfo{
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(3, 6rem);
   gap: 2rem;
 }
 
 .userInfo div{
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  
-}
-
-.userInfo div div{
   display: grid;
   place-content: center;
-  width: 20rem;
-  height: 6rem;
   background-color: var(--bg-main-color);
   border-radius: 1rem;
   box-shadow: 0.2rem 0.2rem 0rem 0.2rem rgba(0,0,0, 0.25);
@@ -82,15 +73,25 @@
   align-items: flex-start;
 }
 
-.pictureSection div{
+.pictureSection > div{
   position: relative;
+  font-size: 22rem;
+  display: grid;
+  place-content: center;
+  color: #FF8E3C;
   width: 250px;
   height: 250px;
-  background-color: var(--orange-color);
+  background-color: #ffd0ad;
+  border: 8px solid var(--orange-color);
   border-radius: 50%;
 }
 
 .pictureSection div div{
+  display: grid;
+  place-content: center;
+  font-size: 3rem;
+  padding-left: 0.7rem;
+  color: var(--main-text-color);
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -100,6 +101,7 @@
   border-radius: 50%;
 }
 
+
 @media only screen and (max-width: 470px){
   .sectionData{
     gap: 1rem;
@@ -107,9 +109,5 @@
 
   .username p{
     font-size: 2.5rem;
-  }
-
-  .userInfo div div{
-    
   }
 }

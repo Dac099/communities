@@ -1,0 +1,29 @@
+.profilePicture{
+  width: 25rem;
+  height: 25rem;
+  background-color: white;
+  color: var(--orange-color);
+  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  position: relative;
+  font-family: var(--text-font);
+  font-size: 22rem;
+  border: 0.6rem solid var(--orange-color);
+}
+
+.profilePicture p{
+  position: absolute;
+  font-weight: bold;
+  top: -0.5rem;
+  left: -0.6rem;
+  display: grid;
+  place-content: center;
+  font-size: 2.5rem;
+  width: inherit;
+  height: inherit;
+  background-color: #f5a66bed;
+  border-radius: 50%;
+  color: var(--pink-color);
+  cursor: pointer;
+}

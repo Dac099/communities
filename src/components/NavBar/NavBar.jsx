@@ -16,6 +16,13 @@ export const NavBar = (props) => {
       };
       break;
 
+    case "/profile/settings":
+      navBarData = {  
+        title: "Configura tú perfil",
+        option: "perfil"
+      }
+      break;
+
     case "/grupos":
       navBarData = {
         title: "Tús Grupos",
