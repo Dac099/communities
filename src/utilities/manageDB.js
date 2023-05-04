@@ -54,3 +54,54 @@ const getElementsInGroupsId = async (id_groups) => {
   
   return count;
 }
+
+export const getUserData = async() => {
+  const { data: { user } } = await supabase.auth.getUser();
+  return user;
+}
+
+export const updateUserEmail = async(user_email) => {
+  try {
+    const { data, error } = await supabase.auth.updateUser(
+      {
+        email: user_email
+      }
+    );
+
+    if(error) throw new Error(error.message);
+
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export const updateUserPassword = async(user_password) => {
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      password: user_password
+    });
+
+    if(error) throw new Error(error.message);
+
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export const updateUserMeta = async(username) => {
+  try {
+    const { data, error } = await supabase.auth.updateUser({
+      data: {
+        username: username
+      }
+    });
+
+    if(error) throw new Error(error.message);
+
+    return data;  
+  } catch (error) {
+    return error;
+  }
+}
