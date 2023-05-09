@@ -50,9 +50,9 @@ export const NavBar = (props) => {
       <section
         className={navCard}
       >
-        <Groups className={`${option} ${navBarData.option === "grupos" ? selected : ""}`}/>
-        <Conection className={`${option} ${navBarData.option === "conexiones" ? selected : ""}`}/>
-        <Profile className={`${option} ${navBarData.option === "perfil" ? selected : ""}`}/>
+        <Groups className={`${option} ${navBarData.option === "grupos" ? selected : ""}`} />
+        <Conection className={`${option} ${navBarData.option === "conexiones" ? selected : ""}`} />
+        <Profile className={`${option} ${navBarData.option === "perfil" ? selected : ""}`} />
       </section>
 
       <section

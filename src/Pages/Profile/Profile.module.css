@@ -99,6 +99,7 @@
   height: 60px;
   background-color: var(--pink-color);
   border-radius: 50%;
+  cursor: pointer;
 }
 
 

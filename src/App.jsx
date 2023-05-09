@@ -5,6 +5,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import { Profile } from "./Pages/Profile/Profile";
 import { NotFound } from "./Pages/NotFound/NotFound";
 import { ProfileSettings } from "./Pages/ProfileSettings/ProfileSettings";
+import { NavBar } from "./components/NavBar/NavBar";
 
 export const App = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Profile />} />
+        <Route path="/" element={<Profile />}/>
         <Route path="/login" element={<Login />} />
         <Route path="/profile/settings" element={<ProfileSettings />}/>
         <Route path="*" element={<NotFound />}></Route>
